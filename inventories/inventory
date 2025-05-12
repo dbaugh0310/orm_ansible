@@ -8,8 +8,6 @@ esxi
 control.o.rm ansible_connection=local
 satellite.o.rm
 
-esg.o.rm
-
 [esxi]
 esx1.o.rm
 

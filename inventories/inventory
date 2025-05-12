@@ -1,0 +1,20 @@
+[infra:children]
+control
+esxi
+
+[lab]
+
+[control]
+control.o.rm ansible_connection=local
+satellite.o.rm
+
+esg.o.rm
+
+[esxi]
+esx1.o.rm
+
+[esxi:vars]
+ansible_python_interpreter=/usr/bin/python3
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_private_key_file=~/.ssh/id_rsa

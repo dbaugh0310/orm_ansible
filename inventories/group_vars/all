@@ -1,3 +1,0 @@
----
-all:
-    ansible_user: ansible_user

@@ -1,0 +1,4 @@
+          - name: false_handler
+            ansible.builtin.debug:
+                    msg: Handler got called
+

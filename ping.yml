@@ -7,3 +7,8 @@
           - name: Print message
             ansible.builtin.debug:
                     msg: Hello world
+          - name: Print Username
+            command: whoami
+            register: whoami
+
+          - debug: var=whoami 

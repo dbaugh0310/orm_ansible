@@ -1,0 +1,18 @@
+---
+- name: My first play
+  hosts: satellite.o.rm
+  vars:
+          truth: "true"
+  tasks:
+          - name: Figure out this reboot
+            block:
+               - name: This is not right 
+                 ansible.builtin.shell: /usr/bin/{{ truth }}
+            rescue:
+               - name: Reboot the bitch
+                 ansible.builtin.debug:
+                   msg: We're rebooting!
+
+          - name: Print after message
+            ansible.builtin.debug:
+                    msg: This is after the task 

@@ -1,6 +1,7 @@
 ---
 - name: My first play
-  hosts: satellite.o.rm
+  hosts: all
+  become: false
   tasks:
           - name: Ping my hosts
             ansible.builtin.ping:

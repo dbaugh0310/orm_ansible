@@ -3,10 +3,7 @@ control
 esxi
 
 [lab]
-
-[leapp]
-cindy-berkery.o.rm
-tonya-staplins.o.rm
+ina-cunio.o.rm
 
 [control]
 control.o.rm ansible_connection=local

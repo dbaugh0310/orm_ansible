@@ -6,10 +6,17 @@
     - name: Status Check
       block:
         - name: Status Check
-            ansible.builtin.shell:
-                cmd: /usr/bin/insights-client --status
+          ansible.builtin.shell:
+              cmd: /usr/bin/insights-client --status
+          register: status
+          failed_when: "'NOT' in status.stdout"
+              
+
+        - name: print output
+          ansible.builtin.debug: 
+              msg: "{{ status.stdout }}"
                          
       rescue:
-        - name: Register on failure
-            ansible.builtin.shell:
-                cmd: /usr/bin/insights-client --register
+         - name: Register on failure
+           ansible.builtin.shell:
+             cmd: /usr/bin/insights-client --register

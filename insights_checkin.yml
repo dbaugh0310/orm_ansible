@@ -4,6 +4,12 @@
   tasks: 
 
     - name: Status Check
-      ansible.builtin.shell: 
-        cmd: /usr/bin/insights-client --status-check
-
+      block:
+        - name: Status Check
+            ansible.builtin.shell:
+                cmd: /usr/bin/insights-client --status
+                         
+      rescue:
+        - name: Register on failure
+            ansible.builtin.shell:
+                cmd: /usr/bin/insights-client --register

@@ -1,0 +1,6 @@
+---
+- hosts: satellite.o.rm
+  roles: 
+        - role: satellite
+          vars: 
+                target_version: "6.16"

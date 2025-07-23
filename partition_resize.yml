@@ -1,0 +1,19 @@
+---
+- name: Resize partitions on guests
+  hosts: leapp
+  tasks:
+          - name: Rescan scsi bus
+            ansible.builtin.shell:
+                    cmd: echo 1 > /sys/class/block/sda/device/rescan
+
+          - name: Resize partition
+            ansible.builtin.shell:
+                    cmd: parted ---pretend-input-tty /dev/sda resizepart 2 100%
+
+          - name: Extend PV
+            ansible.builtin.shell:
+                    cmd: pvresize /dev/sda2
+
+          - name: Extend VG
+            ansible.builtin.shell: 
+                cmd: vgscan

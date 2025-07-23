@@ -5,5 +5,5 @@
 
     - name: Status Check
       ansible.builtin.shell: 
-        cmd: /usr/bin/insights-client --status-check
+        cmd: /usr/bin/insights-client --status
 

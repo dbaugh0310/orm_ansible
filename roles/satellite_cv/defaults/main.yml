@@ -7,6 +7,7 @@ satellite_username: "aap_user"
 # It's highly recommended to use Ansible Vault for passwords
 satellite_password: "e+4=cyuZ%6S6]%&"
 satellite_validate_certs: false # Set to false if using self-signed certs without proper trust
+satellite_org: "Outrun Motorsports"
 
 # Content View Management
 # List of content views to publish and promote

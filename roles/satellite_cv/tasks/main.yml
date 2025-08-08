@@ -4,6 +4,7 @@
         username: "{{ satellite_username }}"
         password: "{{ satellite_password }}"
         server_url: "{{ satellite_url }}"
+        organization: "{{ satellite_org }}"
         validate_certs: "{{ satellite_validate_certs }}"
         content_view: "{{ item.name }}"
         description: "{{ item.publish_description | default('') }}"

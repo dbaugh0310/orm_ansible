@@ -1,0 +1,7 @@
+---
+- name: "Patch and Reboot"
+  hosts: all 
+  become: true
+
+  roles:
+    - patching

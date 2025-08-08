@@ -1,4 +1,4 @@
-# Patching Details
+# Not currently used
 # Whether to perform patching
 perform_patching: true
 # Groups of hosts to patch (from your Satellite dynamic inventory)

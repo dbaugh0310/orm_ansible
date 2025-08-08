@@ -3,7 +3,8 @@ control
 esxi
 
 [lab]
-ina-cunio.o.rm
+doug-pettit.o.rm
+flora-correira.o.rm
 
 [control]
 control.o.rm ansible_connection=local

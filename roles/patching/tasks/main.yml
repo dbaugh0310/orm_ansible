@@ -1,11 +1,12 @@
 ---
-- name: Perform DNF system update
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
+# - name: Perform DNF system update
+#   ansible.builtin.dnf:
+#     name: "*"
+#     state: latest
 
 - name: Check if we need a reboot
   ansible.builtin.command: dnf needs-restarting -r
   register: needs_restarting
+  failed_when: needs_restarting.rc >= 2
   changed_when: needs_restarting.rc == 1
-  notify: We need to reboot
+  notify: reboot_required

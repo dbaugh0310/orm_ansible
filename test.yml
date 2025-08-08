@@ -1,7 +1,7 @@
 ---
 - name: "Testing sat stuff"
-  hosts: satellite.o.rm
-  become: false
+  hosts: flora-correira.o.rm 
+  become: true
   # tasks:
   #   - name: "Get content view"
   #     redhat.satellite.content_view:
@@ -18,5 +18,5 @@
     #           var: cv_info
 
   roles:
-    - satellite_cv
+    - patching
 

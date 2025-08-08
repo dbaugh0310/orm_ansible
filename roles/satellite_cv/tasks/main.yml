@@ -7,7 +7,8 @@
         organization: "{{ satellite_org }}"
         validate_certs: "{{ satellite_validate_certs }}"
         content_view: "{{ item.name }}"
-        description: "{{ item.publish_description | default('') }}"
+        lifecycle_environments:
+          - Lab Environment
       loop: "{{ content_views_to_manage }}"
       loop_control:
         label: "Publishing {{ item.name }}"

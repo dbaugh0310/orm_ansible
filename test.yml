@@ -1,18 +1,18 @@
 ---
-- name: My first play
+- name: "Pull CV Info"
   hosts: satellite.o.rm
-  vars:
-          truth: "true"
+  become: false
   tasks:
-          - name: Figure out this reboot
-            block:
-               - name: This is not right 
-                 ansible.builtin.shell: /usr/bin/{{ truth }}
-            rescue:
-               - name: Reboot the bitch
-                 ansible.builtin.debug:
-                   msg: We're rebooting!
+          - name: "Get content view"
+            redhat.satellite.content_view_info:
+                    username: "aap_user"
+                    password: "e+4=cyuZ%6S6]%&"
+                    server_url: "https://satellite.o.rm"
+                    organization: "Outrun Motorsports"
+                    validate_certs: false
+                    name: "RHEL 8"
+            register: cv_info
 
-          - name: Print after message
+          - name: "Print content view"
             ansible.builtin.debug:
-                    msg: This is after the task 
+                    var: cv_info

@@ -1,0 +1,8 @@
+---
+- name: Testing roles
+  hosts: satellite.o.rm
+
+  tasks:
+          - name: "Publish a view"
+            ansible.builtin.include_roles:
+                    name: satellite

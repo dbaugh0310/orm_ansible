@@ -1,5 +1,5 @@
 ---
-- name: "Pull CV Info"
+- name: "Testing sat stuff"
   hosts: satellite.o.rm
   become: false
   # tasks:

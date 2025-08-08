@@ -1,0 +1,15 @@
+---
+- name: Publish and Promote Content Views
+  ansible.builtin.block:
+    - name: Publish Content View '{{ item.name }}'
+      redhat.satellite.content_view_version:
+        username: "{{ satellite_username }}"
+        password: "{{ satellite_password }}"
+        server_url: "{{ satellite_url }}"
+        validate_certs: "{{ satellite_validate_certs }}"
+        content_view: {{ item.name }}
+        description: "{{ item.publish_description | default('') }}"
+      delegate_to: localhost # Run this task on the Ansible control machine
+      loop: "{{ content_views_to_manage }}"
+      loop_control:
+        label: "Publishing {{ item.name }}"

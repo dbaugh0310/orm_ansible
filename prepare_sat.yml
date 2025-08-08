@@ -1,4 +1,0 @@
----
-- hosts: satellite.o.rm
-  roles:
-          - publish

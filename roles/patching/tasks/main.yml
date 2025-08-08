@@ -1,44 +1,11 @@
 ---
-# tasks/patch_hosts.yml
+- name: Perform DNF system update
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
 
-- name: Perform patching on hosts
-  ansible.builtin.block:
-    - name: Set fact for hosts to patch based on groups
-      ansible.builtin.set_fact:
-        # Collect all hosts that belong to any of the specified groups
-        all_hosts_in_groups: "{{ groups | dict2items | selectattr('key', 'in', hosts_to_patch_groups) | map(attribute='value') | flatten | unique }}"
-      run_once: true # Calculate this fact once on the control node
-
-    - name: Skip patching if no hosts found in specified groups
-      ansible.builtin.debug:
-        msg: "No hosts found in the specified groups for patching. Skipping patching tasks."
-      when: all_hosts_in_groups | length == 0
-
-    - name: Apply updates using dnf/yum
-      ansible.builtin.package:
-        name: "{{ patch_packages if patch_packages | length > 0 else '*' }}"
-        state: latest
-        disable_excludes: "main" # Prevents Satellite client exclusions from blocking updates
-      # This task will run only on hosts that are part of 'all_hosts_in_groups'
-      delegate_to: "{{ item }}"
-      loop: "{{ all_hosts_in_groups }}"
-      loop_control:
-        loop_var: item
-        label: "Patching {{ item }}"
-      when:
-        - all_hosts_in_groups | length > 0
-        - item in ansible_play_hosts # Ensure the host is part of the current play's target hosts
-
-    - name: Reboot hosts if necessary after patching
-      ansible.builtin.reboot:
-        reboot_timeout: 600 # Wait up to 10 minutes for reboot
-      delegate_to: "{{ item }}"
-      loop: "{{ all_hosts_in_groups }}"
-      loop_control:
-        loop_var: item
-        label: "Rebooting {{ item }}"
-      when:
-        - reboot_after_patch
-        - all_hosts_in_groups | length > 0
-        - item in ansible_play_hosts
-  when: perform_patching
+- name: Check if we need a reboot
+  ansible.builtin.command: dnf needs-restarting -r
+  register: needs_restarting
+  changed_when: needs_restarting.rc == 1
+  notify: We need to reboot

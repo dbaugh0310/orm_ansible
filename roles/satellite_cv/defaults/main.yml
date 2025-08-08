@@ -14,4 +14,7 @@ satellite_org: "Outrun Motorsports"
 content_views_to_manage:
   - name: "RHEL 8"
     publish_description: "Published via Ansible"
-    promote_to_lifecycle: "Production" # The lifecycle environment to promote to
+    promote_to_lifecycle: "Lab Environment" # The lifecycle environment to promote to
+  - name: "RHEL 9"
+    publish_description: "Published via Ansible"
+    promote_to_lifecycle: "Lab Environment" # The lifecycle environment to promote to

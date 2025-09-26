@@ -1,9 +1,9 @@
 # VMware vCenter Connection Details (for snapshot tasks)
 # These tasks will run on the Ansible control node or a designated host with access to vCenter
-vmware_vcenter_hostname: "your_vcenter_server.example.com"
-vmware_vcenter_username: "vcenter_user"
+vmware_vcenter_hostname: "https://vcenter.o.rm"
+vmware_vcenter_username: "snapshot_user"
 # Use Ansible Vault for sensitive credentials
-vmware_vcenter_password: "your_vcenter_password"
+vmware_vcenter_password: "h>}#B3BipK9X*&;"
 vmware_vcenter_validate_certs: true # Set to false if using self-signed certs without proper trust
 
 # VMware Host Snapshot Details

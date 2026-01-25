@@ -1,0 +1,20 @@
+---
+- name: "Testing sat stuff"
+  hosts: satellite.o.rm 
+  become: false 
+  tasks:
+     - name: "Get content view"
+       redhat.satellite.content_view:
+               username: "aap_user"
+               password: "e+4=cyuZ%6S6]%&"
+               server_url: "https://satellite.o.rm"
+               organization: "Outrun Motorsports"
+               validate_certs: false
+               name: "RHEL 8"
+       register: cv_info
+
+     - name: "Print content view"
+       ansible.builtin.debug:
+               var: cv_info
+
+

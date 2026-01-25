@@ -1,0 +1,8 @@
+---
+- name: Build and Configure Web Servers
+  hosts: ray-tribbett.o.rm  # This matches the group name from Satellite
+  become: yes
+  
+  roles:
+    - role: lab_setup
+    - role: webserver

@@ -1,0 +1,29 @@
+---
+- name: Add firewall ports
+  include_role:
+    name: redhat.rhel_system_roles.firewall
+  vars:
+    firewall:
+      - service: [ http, https ]
+        state: enabled
+        runtime: true
+        permanent: true
+
+- name: Package installation
+  ansible.builtin.package:
+    name: "{{ webserver_packages }}"
+    state: latest
+
+- name: Install and configure flask
+  ansible.builtin.include_tasks: flask.yml
+
+- name: Run database configuration
+  ansible.builtin.include_tasks: db.yml
+  vars:
+    ansible_python_interpreter: "{{ flask_root }}/venv/bin/python"
+
+- name: Install and configure gunicorn
+  ansible.builtin.include_tasks: gunicorn.yml
+
+- name: Install and configure nginx
+  ansible.builtin.include_tasks: nginx.yml

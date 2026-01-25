@@ -1,0 +1,4 @@
+- name: Install baseline packages
+  ansible.builtin.package:
+    name: "{{ lab_packages }}"
+    state: present

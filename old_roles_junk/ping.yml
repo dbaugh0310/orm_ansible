@@ -1,0 +1,15 @@
+---
+- name: My first play
+  hosts: all
+  become: false
+  tasks:
+          - name: Ping my hosts
+            ansible.builtin.ping:
+          - name: Print message
+            ansible.builtin.debug:
+                    msg: Hello world
+          - name: Print Username
+            command: whoami
+            register: whoami
+
+          - debug: var=whoami 

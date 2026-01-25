@@ -1,0 +1,19 @@
+---
+webserver_packages:
+  - mariadb-server
+  - git
+  - python3-pip
+
+git_repo: 'https://github.com/dbaugh0310/flask_po.git'
+git_repo_branch: root
+
+flask_app: poproject.py
+flask_user: flask
+flask_db_user: po_app
+flask_root: /home/flask/flask_po
+flask_static_path: /var/www/html
+flask_virteualenv_command: /usr/bin/python3 -m venv
+flask_pips: 
+      - gunicorn
+      - pymysql
+      - cryptography

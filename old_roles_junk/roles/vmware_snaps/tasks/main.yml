@@ -1,0 +1,42 @@
+---
+# tasks/vmware_snapshots.yml
+
+- name: Create VMware snapshots for specified hosts (Pre-Patch)
+  community.vmware.vmware_snapshot:
+    hostname: "{{ vmware_vcenter_hostname }}"
+    username: "{{ vmware_vcenter_username }}"
+    password: "{{ vmware_vcenter_password }}"
+    validate_certs: "{{ vmware_vcenter_validate_certs }}"
+    name: "{{ item.vm_name }}"
+    snapshot_name: "{{ item.snapshot_name }}"
+    description: "{{ item.description }}"
+    state: "{{ item.state }}" # Should be 'present' for creation
+    quiesce_fs: true # Attempt to quiesce the guest file system (requires VMware Tools)
+  delegate_to: localhost # This task runs on the Ansible control machine
+  loop: "{{ vmware_hosts_for_snapshot }}"
+  loop_control:
+    label: "VMware Snapshot for {{ item.vm_name }}"
+
+
+
+
+
+
+
+# - name: Remove VMware snapshots
+#   community.vmware.vmware_snapshot:
+#     hostname: "{{ vmware_vcenter_hostname }}"
+#     username: "{{ vmware_vcenter_username }}"
+#     password: "{{ vmware_vcenter_password }}"
+#     validate_certs: "{{ vmware_vcenter_validate_certs }}"
+#     name: "{{ item.vm_name }}"
+#     snapshot_name: "{{ item.snapshot_name }}"
+#     state: "absent" # Set to 'absent' to remove the snapshot
+#   delegate_to: localhost # This task runs on the Ansible control machine
+#   loop: "{{ vmware_hosts_for_snapshot }}"
+#   loop_control:
+#     label: "Removing VMware Snapshot for {{ item.vm_name }}"
+#   when:
+#     - vmware_hosts_for_snapshot is defined and vmware_hosts_for_snapshot | length > 0
+#     - item.state == 'absent' # Only remove snapshots here
+#     # In a real scenario, you'd add a condition like 'patching_successful'

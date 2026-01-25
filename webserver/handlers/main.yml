@@ -1,0 +1,11 @@
+---
+- name: Reload gunicorn
+  ansible.builtin.systemd:
+    name: gunicorn
+    state: reloaded
+    daemon_reload: true  # Ensures systemd picks up any unit file changes
+
+- name: Reload nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: reloaded

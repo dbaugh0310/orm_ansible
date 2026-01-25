@@ -1,0 +1,19 @@
+---
+- name: Package installation
+  ansible.builtin.package:
+    name: nginx
+    state: latest
+
+- name: Configure nginx
+  ansible.builtin.copy:
+    src: "{{ flask_root }}/po_app_nginx.conf"
+    dest:  /etc/nginx/conf.d/
+    remote_src: yes
+    validate: /usr/sbin/nginx -t
+  notify: Reload nginx
+
+- name: Start and enable nginx
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: nginx

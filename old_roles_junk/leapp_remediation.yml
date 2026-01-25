@@ -1,0 +1,14 @@
+---
+- name: LEAPP Remediation Demo
+  hosts: leapp
+  tasks: 
+    - name: Remove pata module
+      redhat.rhel_system_roles.modprobe:
+        name: pata_acpi
+        state: absent
+        persistent: absent
+
+    - name: Update answers file
+      ansible.builtin.shell: 
+        cmd: /bin/leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+

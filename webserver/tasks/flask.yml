@@ -1,0 +1,50 @@
+---
+- name: Create flask user
+  ansible.builtin.user:
+    name: "{{ flask_user }}"
+
+- name: Git checkout
+  ansible.builtin.git:
+    repo: "{{ git_repo }}"
+    dest: "{{ flask_root }}"
+    version: "{{ git_repo_branch }}"
+    force: True
+  become: True
+  become_user: "{{ flask_user }}" 
+  register: git_pull
+  notify: Reload gunicorn
+
+- name: Include encrypted secrets
+  ansible.builtin.include_vars: secrets.yml
+
+- name: Create .env file from template
+  ansible.builtin.template:
+    src: .env.j2
+    dest: "{{ flask_root }}/.env"
+    mode: '0600'  # Strict permissions for secret files
+  notify: Reload gunicorn
+  no_log: true
+
+- name: Create static directory
+  ansible.builtin.file:
+    path: /var/www/html/static
+    state: directory
+
+- name: Copy static files over
+  ansible.builtin.unarchive:
+    src: /home/jdeffen/flask_po/po_app/static/static.tar.gz
+    dest: /var/www/html/static
+
+- name: Setup venv and install pips
+  ansible.builtin.pip:
+    requirements: "{{ flask_root }}/requirements.txt"
+    virtualenv: "{{ flask_root }}/venv"
+    virtualenv_command: "{{ flask_virteualenv_command }}"
+  become: true
+  become_user: "{{ flask_user }}" 
+
+- name: Install additional pips
+  ansible.builtin.pip:
+    name: "{{ flask_pips }}"
+    virtualenv: "{{ flask_root }}/venv"
+    virtualenv_command: "{{ flask_virteualenv_command }}"

@@ -1,0 +1,35 @@
+---
+- name: Disable root ssh login
+  include_role:
+    name: redhat.rhel_system_roles.sshd
+  vars:
+    sshd_config:
+      PermitRootLogin: no
+
+- name: Ensure the SSH user exists
+  ansible.builtin.user:
+    name: "{{ orm_ssh_user }}"
+    state: present
+
+- name: Set up authorized keys
+  ansible.posix.authorized_key:
+    user: "{{ orm_ssh_user }}"
+    state: present
+    key: "{{ orm_ssh_keys }}"
+
+- name: Configure sudoers
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ orm_ssh_user }}"
+    content: |
+      {{ orm_ssh_user }} ALL = (ALL) NOPASSWD : ALL
+      Defaults:{{ orm_ssh_user }} !requiretty
+    mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
+
+- name: Ensure home directory ownership is correct
+  ansible.builtin.file:
+    path: "/home/{{ orm_ssh_user }}"
+    owner: "{{ orm_ssh_user }}"
+    group: "{{ orm_ssh_user }}"
+    recurse: yes
+    state: directory

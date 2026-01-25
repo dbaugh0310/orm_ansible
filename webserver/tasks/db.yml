@@ -1,0 +1,52 @@
+---
+- name: Start mariadb
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: mariadb
+
+- name: Create database
+  community.mysql.mysql_db:
+    login_unix_socket: /var/lib/mysql/mysql.sock
+    name: "{{ flask_db_user }}"
+    state: present
+
+- name: Create database user
+  community.mysql.mysql_user:
+    login_unix_socket: /var/lib/mysql/mysql.sock
+    name: "{{ flask_db_user }}"
+    password: "{{ flask_db_password }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: Setup Database
+  ansible.builtin.shell:
+    cmd: "{{ flask_root }}/venv/bin/flask db upgrade"
+  args:
+    chdir: "{{ flask_root }}"
+  environment:
+    FLASK_APP: "{{ flask_app }}"
+  become: true
+  become_user: flask  
+
+- name: Populate Database
+  ansible.builtin.shell:
+    cmd: "{{ flask_root }}/venv/bin/flask load-json"
+  args:
+    chdir: "{{ flask_root }}"
+  environment:
+    FLASK_APP: "{{ flask_app }}"
+    PYTHONPATH: "{{ flask_root }}"
+  become: true
+  become_user: flask  
+
+- name: Create admin user in po_app
+  ansible.builtin.shell:
+    cmd: "{{ flask_root }}/venv/bin/flask set-password --password {{ flask_db_password }}"
+  args:
+    chdir: "{{ flask_root }}"
+  environment:
+    FLASK_APP: "{{ flask_app }}"
+  become: true
+  become_user: flask  
+

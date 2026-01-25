@@ -1,0 +1,19 @@
+---
+- name: Create gunicorn systemd service file
+  ansible.builtin.copy:
+    src: "{{ flask_root }}/gunicorn.service"
+    dest:  /etc/systemd/system/
+    remote_src: yes
+
+- name: Create gunicorn log directory
+  ansible.builtin.file:
+    path: "{{ flask_root }}/logs"
+    owner: flask
+    group: flask
+    state: directory
+
+- name: Start and enable gunicorn
+  ansible.builtin.systemd_service:
+    state: started
+    enabled: true
+    name: gunicorn

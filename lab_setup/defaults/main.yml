@@ -1,0 +1,11 @@
+---
+# List of packages every lab machine needs
+lab_packages:
+  - vim
+  - tmux
+
+# Firewall services to open
+lab_fw_services:
+  - ssh
+
+lab_fw_ports: []

@@ -1,0 +1,13 @@
+# Not currently used
+# Whether to perform patching
+perform_patching: true
+# Groups of hosts to patch (from your Satellite dynamic inventory)
+# Ensure these groups exist in your Satellite dynamic inventory output
+hosts_to_patch_groups:
+  - "webservers"
+  - "databaseservers"
+
+# If you want to use specific packages instead of a full update
+patch_packages: [] # e.g., ['httpd', 'nginx']
+# Whether to reboot after patching if necessary
+reboot_after_patch: true

@@ -1,0 +1,68 @@
+
+---
+- name: Do initial setup of flask server
+  hosts: webserver.o.rm 
+  become: yes
+
+  tasks:
+        # - name: Disable root ssh login
+        #   include_role:
+        #     name: redhat.rhel_system_roles.sshd
+        #   vars:
+        #     sshd_config:
+        #       PermitRootLogin: no
+
+        # - name: Add firewall ports
+        #   include_role:
+        #     name: redhat.rhel_system_roles.firewall
+        #   vars:
+        #     firewall:
+        #       - service: [ http, https, ssh ]
+        #         state: enabled
+        #         runtime: true
+        #         permanent: true
+
+        # - name: Package installation
+        #   dnf:
+        #     name: "{{ webserver_packages }}"
+        #     state: latest
+
+        - name: Start mariadb
+          ansible.builtin.systemd_service:
+            state: started
+            enabled: true
+            name: mariadb
+
+        # - name: Create flask user
+        #   ansible.builtin.user:
+        #     name: flask
+        
+        # - name: Git checkout
+        #   ansible.builtin.git:
+        #     repo: 'https://github.com/dbaugh0310/flask_po.git'
+        #     dest: /home/flask/flask_po
+        #     version: root 
+        #   become: true
+        #   become_user: flask 
+
+        # - name: Setup venv and install pips
+        #   ansible.builtin.pip:
+        #     requirements: /home/flask/flask_po/requirements.txt
+        #     virtualenv: /home/flask/flask_po/venv
+        #     virtualenv_command: "/usr/bin/python3 -m venv"
+        #   become: true
+        #   become_user: flask 
+
+        # - name: Setup venv and install pips
+        #   ansible.builtin.pip:
+        #     name: 
+        #       - gunicorn
+        #       - pymysql
+        #       - cryptography
+        #     virtualenv: /home/flask/flask_po/venv
+        #     virtualenv_command: "/usr/bin/python3 -m venv"
+
+#       -name: Set SELinux context on gunicorn executable
+#       -name: Create gunicorn service file
+#       -name: Start and enable gunicorn service
+#       -name: Configure nginx

@@ -1,0 +1,25 @@
+- name: Manage Firewall Settings
+  block:
+    - name: Ensure firewalld is installed and running
+      ansible.builtin.service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Allow standard lab services
+      ansible.posix.firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      loop: "{{ lab_fw_services }}"
+      notify: Reload firewalld  # This triggers the handler
+
+    - name: Allow specific lab ports
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      loop: "{{ lab_fw_ports }}"
+      notify: Reload firewalld  # This triggers the handler

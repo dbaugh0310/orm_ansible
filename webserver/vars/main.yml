@@ -12,6 +12,7 @@ flask_user: flask
 flask_db_user: po_app
 flask_root: /home/flask/flask_po
 flask_static_path: /var/www/html
+flask_static_source: 'https://satellite.o.rm/pulp/content/Outrun_Motorsports/Library/custom/PO_App/static_files/static.tar.gz'
 flask_virteualenv_command: /usr/bin/python3 -m venv
 flask_pips: 
       - gunicorn

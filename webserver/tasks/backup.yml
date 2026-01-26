@@ -1,0 +1,12 @@
+- name: Drop backup script
+  ansible.builtin.template:
+    src: static_backup.j2
+    dest: "{{ flask_root }}/static_backup.sh"
+    mode: '0770'
+
+- name: Setup cron job
+  ansible.builtin.cron:
+    name: "backup static"
+    hour: "2"
+    job: "/bin/bash {{ flask_root }}/static_backup.sh" 
+  become: True

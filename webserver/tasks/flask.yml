@@ -27,13 +27,20 @@
 
 - name: Create static directory
   ansible.builtin.file:
-    path: /var/www/html/static
+    path: "{{ flask_static_path }}/static"
     state: directory
 
-- name: Copy static files over
+- name: Download static files
+  ansible.builtin.get_url:
+    url: "{{ flask_static_source }}"
+    dest: "{{ flask_static_path }}"
+  register: download_result
+
+- name: Unarchive static files
   ansible.builtin.unarchive:
-    src: /home/jdeffen/flask_po/po_app/static/static.tar.gz
-    dest: /var/www/html/static
+    src: "{{ flask_static_path }}"
+    dest: "{{ flask_static_path }}/static"
+  when: download_result.changed
 
 - name: Setup venv and install pips
   ansible.builtin.pip:

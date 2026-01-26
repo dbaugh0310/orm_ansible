@@ -27,3 +27,6 @@
 
 - name: Install and configure nginx
   ansible.builtin.include_tasks: nginx.yml
+
+- name: Install and configure backups
+  ansible.builtin.include_tasks: backup.yml

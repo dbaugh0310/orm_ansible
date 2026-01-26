@@ -1,0 +1,11 @@
+#!/bin/bash
+
+APP_DIR="{{ flask_root }}"
+FLAG_FILE="{{ flask_root }}/data/needs_backup"
+TAR_FILE="{{ flask_root }}/static.tar.gz"
+
+# Only run if the flag file exists
+if [ -f "$FLAG_FILE" ]; then
+    tar -czf "$TAR_FILE" -C {{ flask_static_path }}/static/ .
+    rm "$FLAG_FILE"
+fi

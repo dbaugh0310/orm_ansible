@@ -40,6 +40,7 @@
   ansible.builtin.unarchive:
     src: "{{ flask_static_path }}"
     dest: "{{ flask_static_path }}/static"
+    remote_src: True
   when: download_result.changed
 
 - name: Setup venv and install pips

@@ -1,9 +1,0 @@
----
-- name: Announce needed reboot
-  ansible.builtin.debug:
-    msg: "A reboot is required for {{ inventory_hostname }}."
-  listen: reboot_required
-    
-- name: Reboot the host
-  ansible.builtin.reboot:
-  listen: reboot_required

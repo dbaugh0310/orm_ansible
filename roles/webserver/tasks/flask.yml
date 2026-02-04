@@ -14,9 +14,6 @@
   register: git_pull
   notify: Reload gunicorn
 
-- name: Include encrypted secrets
-  ansible.builtin.include_vars: secrets.yml
-
 - name: Create .env file from template
   ansible.builtin.template:
     src: .env.j2

@@ -1,7 +1,0 @@
----
-- name: "Publish and Promote CV"
-  hosts: satellite.o.rm 
-  become: false
-
-  roles:
-    - satellite_cv 

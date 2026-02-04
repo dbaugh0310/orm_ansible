@@ -1,6 +1,6 @@
 ---
 - name: Build and Configure Web Servers
-  hosts: webserver.o.rm  # This matches the group name from Satellite
+  hosts: all
   become: yes
   
   roles:

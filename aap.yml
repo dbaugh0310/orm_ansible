@@ -1,0 +1,7 @@
+---
+- name: Add jdeffen to aap 
+  hosts: aap.o.rm
+  become: yes
+  
+  roles:
+    - role: lab_setup

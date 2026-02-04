@@ -1,0 +1,7 @@
+---
+flask_pips: 
+      - certbot
+      - certbot-nginx
+
+ssl_cert_path: /etc/letsencrypt/live/justindeffenbaugh.com/fullchain.pem
+ssl_key_path: /etc/letsencrypt/live/justindeffenbaugh.com/privkey.pem

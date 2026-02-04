@@ -1,0 +1,7 @@
+---
+- name: Build and Configure Web Servers
+  hosts: all
+  become: yes
+  
+  roles:
+    - orm.ansible.lab_setup

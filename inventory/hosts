@@ -4,6 +4,7 @@
 [lab]
 control.o.rm
 aap.o.rm
+aap26.o.rm
 satellite.o.rm
 webserver.o.rm
 ray-tribbett.o.rm

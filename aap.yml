@@ -1,7 +1,23 @@
 ---
-- name: Add jdeffen to aap 
-  hosts: aap.o.rm
+- name: Do some aap setup
+  hosts: aap26.o.rm
   become: yes
-  
+
+  vars:
+    lab_fw_ports:
+      - 80
+      - 443
+      - 5432
+      - 6379
+      - 8443
+      - 27199
+      - 8080
+      - 8081
+      - 8444
+      - 8082
+      - 8445
+      - 8083
+      - 8446
+
   roles:
     - role: lab_setup

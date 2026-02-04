@@ -3,6 +3,7 @@
 lab_packages:
   - vim
   - tmux
+  - wget
 
 # Firewall services to open
 lab_fw_services:

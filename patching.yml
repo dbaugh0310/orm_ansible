@@ -1,0 +1,9 @@
+---
+- name: Linux server patching
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Include patching role
+      ansible.builtin.include_role:
+        name: orm.ansible.patching

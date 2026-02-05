@@ -1,0 +1,9 @@
+---
+# This always runs for every server
+- name: Run basic ping check
+  include_tasks: ping.yml
+
+# This only runs if the host is in the 'web_servers' group
+- name: Run webserver specific checks
+  include_tasks: webserver.yml
+  when: "'web_servers' in group_names"

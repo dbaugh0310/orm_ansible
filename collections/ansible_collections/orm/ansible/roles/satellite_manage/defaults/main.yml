@@ -1,4 +1,3 @@
-satellite_url: "https://satellite.o.rm"
 validate_certs: false
 rh_org: "Outrun Motorsports"
 cv_list:

@@ -1,0 +1,14 @@
+---
+- name: URI Check
+  ansible.builtin.uri:
+    url: http://justindeffenbaugh.com
+    return_content: true
+  register: this
+  failed_when: "this is failed or 'The PO Project' not in this.content"
+
+- name: Report Web Status
+  ansible.builtin.debug:
+    msg: >
+      Webserver on {{ inventory_hostname }} is
+      {{ 'UP' if this.status == 200 else 'DOWN' }}
+      (HTTP Status: {{ this.status | default('No Response') }})

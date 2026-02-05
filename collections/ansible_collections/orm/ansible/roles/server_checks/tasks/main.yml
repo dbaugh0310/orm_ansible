@@ -6,4 +6,4 @@
 # This only runs if the host is in the 'web_servers' group
 - name: Run webserver specific checks
   include_tasks: webserver.yml
-  when: "'web_servers' in group_names"
+  when: "'role_webserver' in group_names"

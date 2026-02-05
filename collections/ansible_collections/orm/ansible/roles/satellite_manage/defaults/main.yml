@@ -1,4 +1,6 @@
 satellite_url: "https://satellite.o.rm"
+satellite_username: "{{ lookup('ansible.builtin.env', 'FOREMAN_USERNAME') }}"
+satellite_password: "{{ lookup('ansible.builtin.env', 'FOREMAN_PASSWORD') }}"
 validate_certs: false
 rh_org: "Outrun Motorsports"
 cv_list:

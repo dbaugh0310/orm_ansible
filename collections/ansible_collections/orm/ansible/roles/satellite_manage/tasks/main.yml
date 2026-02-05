@@ -7,6 +7,7 @@
     content_view: "{{ item }}"
     lifecycle_environments: "{{ prod_lce }}"
     current_lifecycle_environment: "{{ dev_lce }}"
+    validate_certs: "{{ validate_certs }}"
   loop: "{{ cv_list }}"
 
 - name: Promote Library to Lab Environment
@@ -18,4 +19,5 @@
     content_view: "{{ item }}"
     lifecycle_environments: "{{ dev_lce }}"
     current_lifecycle_environment: "Library"
+    validate_certs: "{{ validate_certs }}"
   loop: "{{ cv_list }}"

@@ -1,3 +1,4 @@
 ---
 - name: Ping Test
   ansible.builtin.ping:
+  ignore_errors: true

@@ -1,0 +1,8 @@
+---
+- name: Satellite CV Publish/Promote
+  hosts: localhost
+
+  tasks:
+    - name: Include satellite role
+      ansible.builtin.include_role:
+        name: orm.ansible.satellite_manage

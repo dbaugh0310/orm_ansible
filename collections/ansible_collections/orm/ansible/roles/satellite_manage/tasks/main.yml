@@ -1,0 +1,21 @@
+- name: Promote Lab Environment to Lab Production
+  redhat.satellite.content_view_version:
+    #username: "{{ lookup('ansible.builtin.env', 'SAT_USERNAME') }}"
+    #password: "{{ lookup('ansible.builtin.env', 'SAT_PASSWORD') }}"
+    server_url: "{{ satellite_url }}"
+    organization: "{{ rh_org }}"
+    content_view: "{{ item }}"
+    lifecycle_environments: "{{ prod_lce }}"
+    current_lifecycle_environment: "{{ dev_lce }}"
+  loop: "{{ cv_list }}"
+
+- name: Promote Library to Lab Environment
+  redhat.satellite.content_view_version:
+    #username: "{{ lookup('ansible.builtin.env', 'SAT_USERNAME') }}"
+    #password: "{{ lookup('ansible.builtin.env', 'SAT_PASSWORD') }}"
+    server_url: "{{ satellite_url }}"
+    organization: "{{ rh_org }}"
+    content_view: "{{ item }}"
+    lifecycle_environments: "{{ dev_lce }}"
+    current_lifecycle_environment: "Library"
+  loop: "{{ cv_list }}"

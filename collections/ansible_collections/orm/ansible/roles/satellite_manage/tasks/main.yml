@@ -1,7 +1,7 @@
 - name: Promote Lab Environment to Lab Production
   redhat.satellite.content_view_version:
-    username: "{{ lookup('ansible.builtin.env', 'SAT_USERNAME') }}"
-    password: "{{ lookup('ansible.builtin.env', 'SAT_PASSWORD') }}"
+    username: "{{ lookup('ansible.builtin.env', 'SATELLITE_USERNAME') }}"
+    password: "{{ lookup('ansible.builtin.env', 'SATELLITE_PASSWORD') }}"
     server_url: "{{ satellite_url }}"
     organization: "{{ rh_org }}"
     content_view: "{{ item }}"

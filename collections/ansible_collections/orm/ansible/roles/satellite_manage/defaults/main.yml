@@ -1,6 +1,6 @@
 satellite_url: "https://satellite.o.rm"
 validate_certs: false
-rh_org: "Outrun_Motorsports"
+rh_org: "Outrun Motorsports"
 cv_list:
   - "RHEL 8"
   - "RHEL 9"

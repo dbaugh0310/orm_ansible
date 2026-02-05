@@ -1,0 +1,9 @@
+---
+- name: Execute Server Health Checks
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: Use server_checks role
+      ansible.builtin.include_role:
+        name: orm.ansible.server_checks

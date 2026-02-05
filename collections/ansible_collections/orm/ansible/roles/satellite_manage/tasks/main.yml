@@ -12,7 +12,8 @@
     server_url: "{{ satellite_url }}"
     organization: "{{ rh_org }}"
     content_view: "{{ item }}"
-    lifecycle_environments: "{{ prod_lce }}"
+    lifecycle_environments: 
+      - "{{ prod_lce }}"
     current_lifecycle_environment: "{{ dev_lce }}"
     validate_certs: "{{ validate_certs }}"
   loop: "{{ cv_list }}"
@@ -24,7 +25,8 @@
     server_url: "{{ satellite_url }}"
     organization: "{{ rh_org }}"
     content_view: "{{ item }}"
-    lifecycle_environments: "{{ dev_lce }}"
-    current_lifecycle_environment: "Library"
+    lifecycle_environments: 
+     - "{{ dev_lce }}"
+     - Library
     validate_certs: "{{ validate_certs }}"
   loop: "{{ cv_list }}"

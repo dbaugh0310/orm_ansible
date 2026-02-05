@@ -1,3 +1,10 @@
+- name: Pin Satellite Credentials
+  set_fact:
+    # We evaluate the lookup ONCE here
+    satellite_username: "{{ lookup('ansible.builtin.env', 'FOREMAN_USERNAME') }}"
+    satellite_password: "{{ lookup('ansible.builtin.env', 'FOREMAN_PASSWORD') }}"
+  no_log: true
+
 - name: Promote Lab Environment to Lab Production
   redhat.satellite.content_view_version:
     username: "{{ satellite_username }}"

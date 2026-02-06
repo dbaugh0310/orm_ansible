@@ -1,12 +1,4 @@
 ---
-- name: Get packages
-  ansible.builtin.package_facts:
-  check_mode: false
-
-- name: Get services
-  ansible.builtin.service_facts:
-  check_mode: false
-
 - name: Install yum-utils
   ansible.builtin.dnf:
     name: yum-utils

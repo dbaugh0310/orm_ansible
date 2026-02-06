@@ -4,7 +4,7 @@
   connection: local
   tasks:
     - name: Create a filter
-      theforeman.foreman.content_view_filter:
+      redhat.satellite.content_view_filter:
         username: "{{ sat_user }}"
         password: "{{ sat_password }}"
         server_url: "{{ sat_url }}"
@@ -16,7 +16,7 @@
         end_date: "2025-12-31"
         inclusion: true
     # - name: Publish a new version of a content view
-    #   theforeman.foreman.content_view_version:
+    #   redhat.satellite.content_view_version:
     #     username: "{{ sat_user }}"
     #     password: "{{ sat_password }}"
     #     server_url: "{{ sat_url }}"

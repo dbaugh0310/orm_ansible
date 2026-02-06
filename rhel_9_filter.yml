@@ -11,7 +11,7 @@
         name: Make Old Stuff
         organization: "{{ rh_org }}"
         content_view: RHEL 9
-        filter_type: erratum_by_date
+        filter_type: erratum
         inclusion: true
 
     - name: Create a filter rule
